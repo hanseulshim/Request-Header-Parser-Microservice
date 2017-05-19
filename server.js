@@ -17,6 +17,7 @@ app.get('/', function(req,res) {
     res.send("Please go to /api/whoami to see your browser information")
 })
 
-app.listen(8080, function () {
-  console.log('Example app listening on port 8080!')
-})
+var port = process.env.PORT || 8080;
+  app.listen(port, function() {
+    console.log('Node.js listening on port ' + port);
+  });
