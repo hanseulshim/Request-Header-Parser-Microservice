@@ -1,5 +1,15 @@
 var express = require('express')
 var app = express()
+var path = require('path');
+var port = process.env.PORT || 8080;
+
+// view engine setup
+app.set('views', path.join(__dirname, 'views'));
+app.set('view engine', 'jade');
+
+var routes = require('./routes/index');
+app.use('/', routes);
+
 
 app.get('/:api/:whoami', function (req, res) {
   var ipAddress = req.headers['x-forwarded-for']
@@ -13,11 +23,6 @@ app.get('/:api/:whoami', function (req, res) {
   res.send(data)
 })
 
-app.get('/', function(req,res) {
-    res.send("Please go to /api/whoami to see your browser information")
-})
-
-var port = process.env.PORT || 8080;
   app.listen(port, function() {
     console.log('Node.js listening on port ' + port);
   });
